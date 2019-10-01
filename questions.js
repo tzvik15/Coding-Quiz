@@ -5,7 +5,22 @@ var questions = [
         titel: "",
         choices: [],
         answer:""
-    }
+    },
+    {
+        title:"",
+        Choices:[],
+        answer:""
+    },
+    {
+        title:"",
+        Choices:[],
+        answer:""
+    },
+    {
+        title:"",
+        Choices:[],
+        answer:""
+    },
     {
         title:"",
         Choices:[],
