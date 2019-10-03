@@ -13,15 +13,22 @@ var questionCount = 0;
 var questionOrder=[0,1,2,3,4];
 var answerOrder=[0,1,2,3];
 
+var locationOne = document.getElementById("empty-div");
+var newDiv = document.createElement("div");
+var locationTwo = document.getElementById("questionParent");
+var questionDiv = document.createElement("div");
+var answerDiv = document.createElement("div");
+var answerDisplay = document.createElement("h2");
+var clicked = document.getElementsByClassName("btn");
+var answerBtn = document.createElement("button");
+
 //var firstQuestion = questions.filter(function(obj) {return questions.titleOne === "Question one"});
 
 //a function linked to a button that will launch the quiz (this function will include calling other functions: starting timer, update DOM with questions)
 
 var start = function(){
     timer();
-    
     if (questionCount < 5) {
-    questionCount ++;
     questionPull();}
     else stop();
 }
@@ -63,6 +70,7 @@ var shuffle =function(array) {
 var questionPull = function() {
     shuffle(questionOrder);
     shuffle(answerOrder);
+    
     var locationOne = document.getElementById("empty-div");
     var newDiv = document.createElement("div");
     newDiv.textContent="Welcome to the coding quiz! Here are your questions!";
@@ -70,11 +78,12 @@ var questionPull = function() {
     newDiv.setAttribute("id", "questionParent")
     var locationTwo = document.getElementById("questionParent");
     var questionDiv = document.createElement("div");
-    questionDiv.textContent = (questions[questionOrder[0]].title);
+    questionDiv.setAttribute("id", "questionDiv");
+    questionDiv.textContent = (questions[questionOrder[questionCount]].title);
     locationTwo.appendChild(questionDiv);
     for (var i=0; i<answerOrder.length; i++) {
         var answerBtn = document.createElement("button");
-        answerBtn.textContent=questions[questionOrder[0]].choices[answerOrder[i]];
+        answerBtn.textContent=questions[questionOrder[questionCount]].choices[answerOrder[i]];
         answerBtn.setAttribute("class" , "btn");
         locationTwo.appendChild(answerBtn);
     }
@@ -87,18 +96,24 @@ var questionPull = function() {
     answerDiv.appendChild(answerDisplay);
     var clicked = document.getElementsByClassName("btn"); 
     for (var j=0; j<clicked.length; j++) {
-    clicked[j].addEventListener("click" , function(event) {  if (this.innerText == questions[questionOrder[0]].answer) {alert("yes");nextQuestion();} else {
+    clicked[j].addEventListener("click" , function(event) {  if (this.innerText == questions[questionOrder[questionCount]].answer) {
+    if (questionCount === 4) {stop()}    
+    else if (questionCount <= 5) {questionCount++;
+    }  
+    answerDisplay.textContent="correct"; 
+    shuffle(answerOrder);
+    var quest = document.getElementById("questionDiv");
+    quest.textContent = (questions[questionOrder[questionCount]].title);
+    var clicked = document.getElementsByClassName("btn");
+        for (var m=0;m<clicked.length;m++) {
+    clicked[m].textContent = questions[questionOrder[questionCount]].choices[answerOrder[m]];}
+    }  else {
     answerDisplay.textContent="wrong";
     totalSeconds-=15; 
-    } }  
-)};
-}
+    }  
+
+});}}
  
-//a function that replaces the current question with the next one
-var nextQuestion = function(){
-
-}
-
 
 
 
