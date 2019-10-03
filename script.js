@@ -63,37 +63,35 @@ var shuffle =function(array) {
 var questionPull = function() {
     shuffle(questionOrder);
     shuffle(answerOrder);
-    var newDiv = $("<div>");
-    newDiv.text("Welcome to the coding quiz! Here are your questions!");
-    $("#empty-div").append(newDiv);
-    newDiv.attr("id", "questionParent")
-    var questionDiv = $("<div>");
-    questionDiv.text(questions[questionOrder[0]].title);
-    $("#questionParent").append(questionDiv);
-    var answerOne = $("<button>");
-    answerOne.attr("id", "yes");
-    answerOne.text(questions[questionOrder[0]].choices[answerOrder[0]]);
-    $("#questionParent").append(answerOne);
-    var answerTwo = $("<button>")
-    answerTwo.text(questions[questionOrder[0]].choices[answerOrder[1]]);
-    $("#questionParent").append(answerTwo);
-    var answerThree = $("<button>")
-    answerThree.text(questions[questionOrder[0]].choices[answerOrder[2]]);
-    $("#questionParent").append(answerThree);
-    var answerFour = $("<button>")
-    answerFour.text(questions[questionOrder[0]].choices[answerOrder[3]]);
-    $("#questionParent").append(answerFour);
-    var correctAnswer = questions[0].answer;
-    $("#questionParent").on("click", "button" , function(event) {  if (this.innerText == questions[questionOrder[0]].answer) {alert("yes");nextQuestion();} else {
-    var answerDiv = $("<div>");
-    answerDiv.attr("id", "nope");
-    $("#questionParent").append(answerDiv); 
-    $("#nope").empty();
-    var fail = $("<h2>wrong answer</h2>");
-    $("#nope").append(fail);
+    var locationOne = document.getElementById("empty-div");
+    var newDiv = document.createElement("div");
+    newDiv.textContent="Welcome to the coding quiz! Here are your questions!";
+    locationOne.appendChild(newDiv);
+    newDiv.setAttribute("id", "questionParent")
+    var locationTwo = document.getElementById("questionParent");
+    var questionDiv = document.createElement("div");
+    questionDiv.textContent = (questions[questionOrder[0]].title);
+    locationTwo.appendChild(questionDiv);
+    for (var i=0; i<answerOrder.length; i++) {
+        var answerBtn = document.createElement("button");
+        answerBtn.textContent=questions[questionOrder[0]].choices[answerOrder[i]];
+        answerBtn.setAttribute("class" , "btn");
+        locationTwo.appendChild(answerBtn);
+    }
+    var answerDiv = document.createElement("div");
+    answerDiv.setAttribute("id", "nope");
+    locationTwo.appendChild(answerDiv);
+    var answerDisplay = document.createElement("h2");
+    answerDisplay.setAttribute("id", "displayHere")
+    answerDisplay.textContent="";
+    answerDiv.appendChild(answerDisplay);
+    var clicked = document.getElementsByClassName("btn"); 
+    for (var j=0; j<clicked.length; j++) {
+    clicked[j].addEventListener("click" , function(event) {  if (this.innerText == questions[questionOrder[0]].answer) {alert("yes");nextQuestion();} else {
+    answerDisplay.textContent="wrong";
     totalSeconds-=15; 
-    }   
-});
+    } }  
+)};
 }
  
 //a function that replaces the current question with the next one
