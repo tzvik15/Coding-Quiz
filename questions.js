@@ -2,28 +2,28 @@
 
 var questions = [
     {
-        titel: "",
-        choices: [],
-        answer:""
+        title: "Question one",
+        choices: ["answer 1", "answer 2" , "answer 3", "answer 4"],
+        answer:"answer 1"
     },
     {
-        title:"",
-        Choices:[],
-        answer:""
+        title:"Question two",
+        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
+        answer:"answer 1"
     },
     {
-        title:"",
-        Choices:[],
-        answer:""
+        title:"Question three",
+        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
+        answer:"answer 1"
     },
     {
-        title:"",
-        Choices:[],
-        answer:""
+        title:"Question four",
+        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
+        answer:"answer 1"
     },
     {
-        title:"",
-        Choices:[],
-        answer:""
+        title:"Question five",
+        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
+        answer:"answer 1"
     }
 ]

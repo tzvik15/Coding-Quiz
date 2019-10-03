@@ -11,6 +11,9 @@ var secondsElapsed = 0;
 var interval;
 var questionCount = 0;
 var questionOrder=[0,1,2,3,4];
+var answerOrder=[0,1,2,3];
+
+//var firstQuestion = questions.filter(function(obj) {return questions.titleOne === "Question one"});
 
 //a function linked to a button that will launch the quiz (this function will include calling other functions: starting timer, update DOM with questions)
 
@@ -55,12 +58,50 @@ var shuffle =function(array) {
     array.sort(() => Math.random() - 0.5);
   }
 
-//a function that pulls the question to be displayed from the questions file, presents the possible answers (both question order and answer order should be randomized). If correct answer is clicked, next question is displayed. If incorrect answer is clicked, an alert of some kind informs the user the answer was wrong, and the timer losses 15 seconds.
+//a function that pulls the question to be displayed from the questions file, and presents the possible answers (both question order and answer order should be randomized). If correct answer is clicked, next question is displayed. If incorrect answer is clicked, an alert of some kind informs the user the answer was wrong, and the timer losses 15 seconds.
 
 var questionPull = function() {
     shuffle(questionOrder);
-    
-   }
+    shuffle(answerOrder);
+    var newDiv = $("<div>");
+    newDiv.text("Welcome to the coding quiz! Here are your questions!");
+    $("#empty-div").append(newDiv);
+    newDiv.attr("id", "questionParent")
+    var questionDiv = $("<div>");
+    questionDiv.text(questions[questionOrder[0]].title);
+    $("#questionParent").append(questionDiv);
+    var answerOne = $("<button>");
+    answerOne.attr("id", "yes");
+    answerOne.text(questions[questionOrder[0]].choices[answerOrder[0]]);
+    $("#questionParent").append(answerOne);
+    var answerTwo = $("<button>")
+    answerTwo.text(questions[questionOrder[0]].choices[answerOrder[1]]);
+    $("#questionParent").append(answerTwo);
+    var answerThree = $("<button>")
+    answerThree.text(questions[questionOrder[0]].choices[answerOrder[2]]);
+    $("#questionParent").append(answerThree);
+    var answerFour = $("<button>")
+    answerFour.text(questions[questionOrder[0]].choices[answerOrder[3]]);
+    $("#questionParent").append(answerFour);
+    var correctAnswer = questions[0].answer;
+    $("#questionParent").on("click", "button" , function(event) {  if (this.innerText == questions[questionOrder[0]].answer) {alert("yes");nextQuestion();} else {
+    var answerDiv = $("<div>");
+    answerDiv.attr("id", "nope");
+    $("#questionParent").append(answerDiv); 
+    $("#nope").empty();
+    var fail = $("<h2>wrong answer</h2>");
+    $("#nope").append(fail);
+    totalSeconds-=15; 
+    }   
+});
+}
+ 
+//a function that replaces the current question with the next one
+var nextQuestion = function(){
+
+}
+
+
 
 
 //a way for the user to input their initials, once the game ended, that will link the time remaining to the form submission, and store the link as an object in a seperate highscore page. Data in the highscore page should be updated dynamically, and stored to local storage
@@ -77,3 +118,7 @@ var clear = function(){}
 
 playButtun.addEventListener("click", start);
 pauseButtun.addEventListener("click", stop);
+
+
+//this.value for event delegation
+//event.target.matches("#yes")
