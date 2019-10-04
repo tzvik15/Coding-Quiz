@@ -4,7 +4,8 @@
 
 var playButtun = document.querySelector("#startClock");
 var timeLeft = document.querySelector(".time");
-var pauseButtun = document.querySelector("#pause");
+var introText = document.getElementById("intro");
+var done = document.getElementById("#submit");
 
 var totalSeconds = 75;
 var secondsElapsed = 0;
@@ -12,6 +13,7 @@ var interval;
 var questionCount = 0;
 var questionOrder=[0,1,2,3,4];
 var answerOrder=[0,1,2,3];
+var highScores = [];
 
 var locationOne = document.getElementById("empty-div");
 var newDiv = document.createElement("div");
@@ -28,6 +30,8 @@ var answerBtn = document.createElement("button");
 
 var start = function(){
     timer();
+    playButtun.parentNode.removeChild(playButtun);
+    introText.parentNode.removeChild(introText);
     if (questionCount < 5) {
     questionPull();}
     else stop();
@@ -55,7 +59,7 @@ var showTime = function(){
 var stop = function(){
     clearInterval(interval);
     questionCount = 0;
-    highscores();
+    
 }
 
 
@@ -73,7 +77,7 @@ var questionPull = function() {
     
     var locationOne = document.getElementById("empty-div");
     var newDiv = document.createElement("div");
-    newDiv.textContent="Welcome to the coding quiz! Here are your questions!";
+    newDiv.textContent="Here are your questions!";
     locationOne.appendChild(newDiv);
     newDiv.setAttribute("id", "questionParent")
     var locationTwo = document.getElementById("questionParent");
@@ -97,7 +101,7 @@ var questionPull = function() {
     var clicked = document.getElementsByClassName("btn"); 
     for (var j=0; j<clicked.length; j++) {
     clicked[j].addEventListener("click" , function(event) {  if (this.innerText == questions[questionOrder[questionCount]].answer) {
-    if (questionCount === 4) {stop()}    
+    if (questionCount === 4) {endGame(); stop();}    
     else if (questionCount <= 5) {questionCount++;
     }  
     answerDisplay.textContent="correct"; 
@@ -115,11 +119,35 @@ var questionPull = function() {
 });}}
  
 
+//a function that will clear the page of its current content, append a user input for inititals. 
+
+var endGame = function() {
+    var locationTwo = document.getElementById("questionParent");
+    locationTwo.parentNode.removeChild(locationTwo);
+    var finalTextDiv = document.createElement("div");
+    finalTextDiv.textContent = "Congratulations on compleating the quiz! Please enter your initials in the following form, and press the \"submit\" button.";
+    locationOne.appendChild(finalTextDiv);
+    var initialsForm = document.createElement("input");
+    initialsForm.setAttribute("type" , "text");
+    initialsForm.setAttribute("id" , "input");
+    locationOne.appendChild(initialsForm);
+    
+    var submitBtn = document.createElement("button");
+    submitBtn.setAttribute("id", "submit");
+    submitBtn.textContent = "Submit";
+    locationOne.appendChild(submitBtn);
+    submitBtn.addEventListener("click"  ,function() {submit()});
+}
+
+//a function linked to a submit button to store user initials and time in local storage, and navigate to highscores page
+var submit = function() {
+    var inputed = document.getElementById("input");
+    highScores.push({initials:inputed.value, time:timeLeft.innerText});
+    localStorage.setItem("scores", JSON.stringify(highScores));
+    window.location="highscores.html";
+}
 
 
-//a way for the user to input their initials, once the game ended, that will link the time remaining to the form submission, and store the link as an object in a seperate highscore page. Data in the highscore page should be updated dynamically, and stored to local storage
-
-var highscores = function() {}
 
 //a button on the highscore page that will clear the highscore data from local storage as well as dynamically update the screen
 
@@ -130,8 +158,7 @@ var clear = function(){}
 //event listeners
 
 playButtun.addEventListener("click", start);
-pauseButtun.addEventListener("click", stop);
 
 
-//this.value for event delegation
-//event.target.matches("#yes")
+
+
