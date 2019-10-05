@@ -21,9 +21,7 @@
     <script>
         if (window.localStorage.getItem("scores") != undefined){
         var scoresParsed = JSON.parse(window.localStorage.getItem("scores"));
-        //var highScores = [];
-        
-        for (var m = 0;m<=scoresParsed.length; m++) {
+        for (var m = 0;m<scoresParsed.length; m++) {
             var newLine = document.createElement("tr");
             var newCellOne = document.createElement("td");
             var newCellTwo = document.createElement("td");
@@ -35,8 +33,6 @@
             tablePlace.appendChild(newCellTwo);
             
         }}
-
-      
     </script>
 </body>
 </html>

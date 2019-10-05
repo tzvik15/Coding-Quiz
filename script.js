@@ -1,6 +1,6 @@
 //This will be the main script page. I will start by thinking what functions I will need.
 
-//the variables used with query selector
+//the variables paths
 
 var playButtun = document.querySelector("#startClock");
 var timeLeft = document.querySelector(".time");
@@ -9,6 +9,7 @@ var done = document.getElementById("submit");
 var tablePlace = document.getElementById("tableTime");
 var resetBtn = document.getElementById("clearScores");
 var inputed = document.getElementById("input");
+var locationOne = document.getElementById("empty-div");
 
 var totalSeconds = 75;
 var secondsElapsed = 0;
@@ -16,20 +17,6 @@ var interval;
 var questionCount = 0;
 var questionOrder=[0,1,2,3,4];
 var answerOrder=[0,1,2,3];
-var highScores = [];
-var scoresNew=[];
-
-
-var locationOne = document.getElementById("empty-div");
-var newDiv = document.createElement("div");
-var locationTwo = document.getElementById("questionParent");
-var questionDiv = document.createElement("div");
-var answerDiv = document.createElement("div");
-var answerDisplay = document.createElement("h2");
-var clicked = document.getElementsByClassName("btn");
-var answerBtn = document.createElement("button");
-
-//var firstQuestion = questions.filter(function(obj) {return questions.titleOne === "Question one"});
 
 //a function linked to a button that will launch the quiz (this function will include calling other functions: starting timer, update DOM with questions)
 
@@ -40,40 +27,36 @@ var start = function(){
     if (questionCount < 5) {
     questionPull();}
     else stop();
-    //localStorage.setItem("scores", {initials:"pretest", time:0})
 }
 
 //a function that will set the timer to a predetermined number, and immedietly start counting down in 1000 units (so a seconds timer). Will need to constently update the DOM to show the timer decrements
-//a return condition that stops the game once either all questions have been answered correctly, or the timer ran out
 
 var timer = function(){
     interval = setInterval(function() {
         secondsElapsed++;
         showTime();
-      }, 1000);
+    }, 1000);
 }
 
-//a function that updates the timer display
+//a function that updates the timer display. If time reaches 0, counter stops and fail function triggers
 
 var showTime = function(){
     var secondsLeft = totalSeconds - secondsElapsed;
     timeLeft.textContent = secondsLeft;
-    if (secondsLeft === 0) {stop();}
+    if (secondsLeft < 1) {timeLeft.textContent = 0; stop(); fail();}
 }
 
 //a function that stops the timer countdown
 var stop = function(){
     clearInterval(interval);
     questionCount = 0;
-    
 }
-
 
 //a function that shuffles arrays
 
 var shuffle =function(array) {
     array.sort(() => Math.random() - 0.5);
-  }
+}
 
 //a function that pulls the question to be displayed from the questions file, and presents the possible answers (both question order and answer order should be randomized). If correct answer is clicked, next question is displayed. If incorrect answer is clicked, an alert of some kind informs the user the answer was wrong, and the timer losses 15 seconds.
 
@@ -107,12 +90,10 @@ var questionPull = function() {
     var clicked = document.getElementsByClassName("btn"); 
     for (var j=0; j<clicked.length; j++) {
     clicked[j].addEventListener("click" , function(event) {  if (this.innerText == questions[questionOrder[questionCount]].answer) {
-    if (questionCount === 4) {endGame(); stop();}    
-    else if (questionCount <= 5) {questionCount++;
-    }  
+    if (questionCount === 4) {endGame(); stop();} 
+    else if (questionCount <= 5) {questionCount++;}  
     answerDisplay.textContent="correct"; 
     shuffle(answerOrder);
-    
     var quest = document.getElementById("questionDiv");
     if (quest !== null){
     quest.textContent = (questions[questionOrder[questionCount]].title);
@@ -123,9 +104,7 @@ var questionPull = function() {
     answerDisplay.textContent="wrong";
     totalSeconds-=15; 
     }  
-
 });}}
- 
 
 //a function that will clear the page of its current content, append a user input for inititals. 
 
@@ -151,25 +130,9 @@ var submit = function() {
     var inputed = document.getElementById("input");
     var highScores = JSON.parse(localStorage.getItem('scores')) || [];
     highScores.push({initials:inputed.value, time:timeLeft.innerText})
-    //var scoresNew = [];
-    //localStorage.setItem("scores", JSON.stringify("initials test", "time test"));
-    //highScores.push({initials:inputed.value, time:timeLeft.innerText});
-    //var highScores = [];
-    //highScores.push(JSON.parse(localStorage.getItem("scores")));
-    //scoresNew.push(JSON.parse(localStorage.getItem("scores")));
-    //scoresNew.push({initials:inputed.value, time:timeLeft.innerText}); 
-
-    //var combined = scoresNew.concat(highScores);
-    //if (JSON.parse(localStorage.getItem("scores")) != null){
-    
-//}
-   // scoresNew.push({initials:inputed.value, time:timeLeft.innerText});
-    
     localStorage.setItem("scores", JSON.stringify(highScores));
     window.location="highscores.html";
 }
-
-
 
 //a button on the highscore page that will clear the highscore data from local storage as well as dynamically update the screen
 
@@ -179,15 +142,37 @@ tablePlace.parentNode.removeChild(tablePlace);
 
 }
 
+//a function that announces failure, and offers a restart
+
+var fail = function() {
+    var locationTwo = document.getElementById("questionParent");
+    locationTwo.parentNode.removeChild(locationTwo);
+    var finalTextDiv = document.createElement("div");
+    finalTextDiv.setAttribute("id","failDiv")
+    finalTextDiv.textContent = "Unfortunetaly the time ran out before you could answer all the questions. If you'd like to try again, please click the \"restart\" button";
+    locationOne.appendChild(finalTextDiv);
+    var resetBtn = document.createElement("button");
+    resetBtn.setAttribute("id", "reset");
+    resetBtn.textContent = "Resetart Quiz";
+    locationOne.appendChild(resetBtn);
+    resetBtn.addEventListener("click", function() {restart()});
+}
+
+var restart = function(){
+    finalTextDiv=document.getElementById("failDiv");
+    finalTextDiv.parentNode.removeChild(finalTextDiv);
+    resetBtn=document.getElementById("reset");
+    resetBtn.parentNode.removeChild(resetBtn);
+    questionPull();
+    totalSeconds = 75;
+    secondsElapsed = 0;
+    timer();
+}
+
 //event listeners
+
 if (playButtun){
 playButtun.addEventListener("click", start);}
 
-
 if (resetBtn){
 resetBtn.addEventListener("click" , clear);}
- 
-
-
-
-
