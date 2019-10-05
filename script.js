@@ -5,7 +5,10 @@
 var playButtun = document.querySelector("#startClock");
 var timeLeft = document.querySelector(".time");
 var introText = document.getElementById("intro");
-var done = document.getElementById("#submit");
+var done = document.getElementById("submit");
+var tablePlace = document.getElementById("tableTime");
+var resetBtn = document.getElementById("clearScores");
+var inputed = document.getElementById("input");
 
 var totalSeconds = 75;
 var secondsElapsed = 0;
@@ -14,6 +17,8 @@ var questionCount = 0;
 var questionOrder=[0,1,2,3,4];
 var answerOrder=[0,1,2,3];
 var highScores = [];
+var scoresNew=[];
+
 
 var locationOne = document.getElementById("empty-div");
 var newDiv = document.createElement("div");
@@ -35,6 +40,7 @@ var start = function(){
     if (questionCount < 5) {
     questionPull();}
     else stop();
+    //localStorage.setItem("scores", {initials:"pretest", time:0})
 }
 
 //a function that will set the timer to a predetermined number, and immedietly start counting down in 1000 units (so a seconds timer). Will need to constently update the DOM to show the timer decrements
@@ -106,12 +112,14 @@ var questionPull = function() {
     }  
     answerDisplay.textContent="correct"; 
     shuffle(answerOrder);
+    
     var quest = document.getElementById("questionDiv");
+    if (quest !== null){
     quest.textContent = (questions[questionOrder[questionCount]].title);
     var clicked = document.getElementsByClassName("btn");
         for (var m=0;m<clicked.length;m++) {
     clicked[m].textContent = questions[questionOrder[questionCount]].choices[answerOrder[m]];}
-    }  else {
+    }}  else {
     answerDisplay.textContent="wrong";
     totalSeconds-=15; 
     }  
@@ -131,7 +139,6 @@ var endGame = function() {
     initialsForm.setAttribute("type" , "text");
     initialsForm.setAttribute("id" , "input");
     locationOne.appendChild(initialsForm);
-    
     var submitBtn = document.createElement("button");
     submitBtn.setAttribute("id", "submit");
     submitBtn.textContent = "Submit";
@@ -142,7 +149,22 @@ var endGame = function() {
 //a function linked to a submit button to store user initials and time in local storage, and navigate to highscores page
 var submit = function() {
     var inputed = document.getElementById("input");
-    highScores.push({initials:inputed.value, time:timeLeft.innerText});
+    var highScores = JSON.parse(localStorage.getItem('scores')) || [];
+    highScores.push({initials:inputed.value, time:timeLeft.innerText})
+    //var scoresNew = [];
+    //localStorage.setItem("scores", JSON.stringify("initials test", "time test"));
+    //highScores.push({initials:inputed.value, time:timeLeft.innerText});
+    //var highScores = [];
+    //highScores.push(JSON.parse(localStorage.getItem("scores")));
+    //scoresNew.push(JSON.parse(localStorage.getItem("scores")));
+    //scoresNew.push({initials:inputed.value, time:timeLeft.innerText}); 
+
+    //var combined = scoresNew.concat(highScores);
+    //if (JSON.parse(localStorage.getItem("scores")) != null){
+    
+//}
+   // scoresNew.push({initials:inputed.value, time:timeLeft.innerText});
+    
     localStorage.setItem("scores", JSON.stringify(highScores));
     window.location="highscores.html";
 }
@@ -151,13 +173,20 @@ var submit = function() {
 
 //a button on the highscore page that will clear the highscore data from local storage as well as dynamically update the screen
 
-var clear = function(){}
+var clear = function(){   
+window.localStorage.clear();
+tablePlace.parentNode.removeChild(tablePlace);
 
-
+}
 
 //event listeners
+if (playButtun){
+playButtun.addEventListener("click", start);}
 
-playButtun.addEventListener("click", start);
+
+if (resetBtn){
+resetBtn.addEventListener("click" , clear);}
+ 
 
 
 

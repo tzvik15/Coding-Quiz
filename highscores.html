@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet">
     <title>High Scores</title>
 </head>
 <body>
-    <h2>High Scores</h2>
+    <a href="index.html"  alt="link to home page">Home</a>
+    <h2 >High Scores</h2>
+    <table style="width:80%" id="tableTime">
+    <tr>
+        <th>Initials</th>
+        <th>Remaining Time</th>
+    </tr>
+    </table>
+    <button id="clearScores">Reset Scores</button>
+    <script src="script.js"></script>
+    <script>
+        if (window.localStorage.getItem("scores") != undefined){
+        var scoresParsed = JSON.parse(window.localStorage.getItem("scores"));
+        //var highScores = [];
+        
+        for (var m = 0;m<=scoresParsed.length; m++) {
+            var newLine = document.createElement("tr");
+            var newCellOne = document.createElement("td");
+            var newCellTwo = document.createElement("td");
+            var tablePlace = document.getElementById("tableTime");
+            newCellOne.textContent=scoresParsed[m].initials;
+            newCellTwo.textContent=scoresParsed[m].time;
+            tablePlace.appendChild(newLine);
+            tablePlace.appendChild(newCellOne);
+            tablePlace.appendChild(newCellTwo);
+            
+        }}
+
+      
+    </script>
 </body>
 </html>
