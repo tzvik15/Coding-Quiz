@@ -84,6 +84,10 @@ a:visited {
 
 #questionDiv{
   font-family: 'Grenze', serif;
+  background-color:rgb(160, 154, 154);
+  width:40%;
+  text-align:center;
+  border-radius: 10px;
 }
 
 .btn{
@@ -125,4 +129,12 @@ a:visited {
   margin-bottom:10px;
 }
 
+#foot {
+  background-color:rgb(160, 154, 154);
+  color:black;
+  padding:5px;
+  width:90%;
+  position:absolute;
+  bottom: 0;
+}
 

@@ -3,21 +3,21 @@
 var questions = [
     {
         title: "What is your name?",
-        choices: ["It is Arthur, king of the Brittons", "Sir Galahad of Camelot" , "Sir Robin of Camelot", "none of the above"],
-        answer:"none of the above"
+        choices: ["It is Arthur, king of the Brittons", "Sir Galahad of Camelot" , "Sir Robin of Camelot", "None of the above!"],
+        answer:"None of the above!"
     },
     {
         title:"What is your quest?",
-        choices:["to seek the holy grail", "to fight!" , "to pass this quiz", "I seek the grail"],
-        answer:"to pass this quiz"
+        choices:["To seek the holy grail", "To fight!" , "To pass this quiz", "I seek the grail"],
+        answer:"To pass this quiz"
     },
     {
         title:"What is your favorite color?",
-        choices:["blue", "yellow" , "green", "orange"],
-        answer:"yellow"
+        choices:["Blue", "Yellow" , "Green", "Orange"],
+        answer:"Yellow"
     },
     {
-        title:"What is the capital of Assyria",
+        title:"What is the capital of Assyria?",
         choices:["Baghdad", "Assur" , "Teheran", "Rabat-Amon"],
         answer:"Assur"
     },
