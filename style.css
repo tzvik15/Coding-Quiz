@@ -138,3 +138,85 @@ a:visited {
   bottom: 0;
 }
 
+@media screen and (min-width:769px) and (max-width:980px){
+  #startClock {
+    top:250px;
+    left:10px;
+  }
+  #endText {
+    width:60%;
+  }
+  #failDiv {
+    width:60%;
+  }
+  #explain {
+    width:60%;
+  }
+}
+
+@media screen and (min-width:641px) and (max-width:768px){
+  #clearScores{
+    margin-left:0;
+  }
+  #startClock {
+    top:250px;
+    left:10px;
+  }
+  #questionDiv{
+    width:60%;
+  }
+  #failDiv{
+    width:60%;
+  }
+  #explain {
+    width:60%;
+  }
+}
+
+@media screen and (max-width:640px){
+  #startClock {
+    top:320px;
+  }
+
+  .timer {
+    position:relative;
+    top:5px;
+    padding:5px;
+  }
+
+  #startClock {
+  top:320px;
+  left:10px;  
+  }
+
+  .left {
+    float:right;
+    position:relative; 
+    top:-18px;
+    padding-bottom: 4px;
+
+  } 
+  #home, #scores{
+    float:left;
+  }
+  #clearScores {
+
+    bottom:5px;
+   margin-left:0;
+  }
+  #score {
+    float:right;
+    margin-top:-7px;
+    margin-right:10px;
+  }
+
+  #questionDiv{
+    width:60%;
+  }
+
+  /* #foot {
+    position:fixed;
+    bottom:0;
+    margin-bottom: auto;
+  } */
+} 

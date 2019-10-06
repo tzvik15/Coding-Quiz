@@ -10,7 +10,7 @@ var tablePlace = document.getElementById("tableTime");
 var resetBtn = document.getElementById("clearScores");
 var inputed = document.getElementById("input");
 var locationOne = document.getElementById("empty-div");
-
+//var secondsLeft = totalSeconds - secondsElapsed;
 //sound effects
 var audio = new Audio('Holy Grail.mp3 ');
 audio.volume = 0.3;
@@ -53,7 +53,7 @@ var timer = function(){
 
 var showTime = function(){
     var secondsLeft = totalSeconds - secondsElapsed;
-    timeLeft.textContent = secondsLeft;
+    timeLeft.textContent = "Time remaining:" +secondsLeft + " seconds";
     if (secondsLeft < 1) {timeLeft.textContent = 0; stop(); fail();}
 }
 
@@ -61,6 +61,7 @@ var showTime = function(){
 var stop = function(){
     clearInterval(interval);
     questionCount = 0;
+    timeLeft.textContent = "NO TIME LEFT!";
 }
 
 //a function that shuffles arrays
