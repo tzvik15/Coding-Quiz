@@ -11,6 +11,16 @@ var resetBtn = document.getElementById("clearScores");
 var inputed = document.getElementById("input");
 var locationOne = document.getElementById("empty-div");
 
+//sound effects
+var audio = new Audio('Holy Grail.mp3 ');
+audio.volume = 0.3;
+var audio2 = new Audio("ni.mp3");
+audio2.volume = 1.0;
+var audio3 = new Audio("juststay.mp3");
+audio3.volume = 1.0;
+var audio4 = new Audio("notfool.mp3");
+audio4.volume = 1.0;
+
 var totalSeconds = 75;
 var secondsElapsed = 0;
 var interval;
@@ -21,6 +31,7 @@ var answerOrder=[0,1,2,3];
 //a function linked to a button that will launch the quiz (this function will include calling other functions: starting timer, update DOM with questions)
 
 var start = function(){
+    audio.play()
     timer();
     playButtun.parentNode.removeChild(playButtun);
     introText.parentNode.removeChild(introText);
@@ -92,7 +103,6 @@ var questionPull = function() {
     clicked[j].addEventListener("click" , function(event) {  if (this.innerText == questions[questionOrder[questionCount]].answer) {
     if (questionCount === 4) {endGame(); stop();} 
     else if (questionCount <= 5) {questionCount++;}  
-    answerDisplay.textContent="correct"; 
     shuffle(answerOrder);
     var quest = document.getElementById("questionDiv");
     if (quest !== null){
@@ -101,7 +111,7 @@ var questionPull = function() {
         for (var m=0;m<clicked.length;m++) {
     clicked[m].textContent = questions[questionOrder[questionCount]].choices[answerOrder[m]];}
     }}  else {
-    answerDisplay.textContent="wrong";
+    audio2.play();
     totalSeconds-=15; 
     }  
 });}}
@@ -112,6 +122,7 @@ var endGame = function() {
     var locationTwo = document.getElementById("questionParent");
     locationTwo.parentNode.removeChild(locationTwo);
     var finalTextDiv = document.createElement("div");
+    finalTextDiv.setAttribute("id", "endText");
     finalTextDiv.textContent = "Congratulations on compleating the quiz! Please enter your initials in the following form, and press the \"submit\" button.";
     locationOne.appendChild(finalTextDiv);
     var initialsForm = document.createElement("input");
@@ -136,7 +147,8 @@ var submit = function() {
 
 //a button on the highscore page that will clear the highscore data from local storage as well as dynamically update the screen
 
-var clear = function(){   
+var clear = function(){ 
+audio4.play();      
 window.localStorage.clear();
 tablePlace.parentNode.removeChild(tablePlace);
 
@@ -149,13 +161,13 @@ var fail = function() {
     locationTwo.parentNode.removeChild(locationTwo);
     var finalTextDiv = document.createElement("div");
     finalTextDiv.setAttribute("id","failDiv")
-    finalTextDiv.textContent = "Unfortunetaly the time ran out before you could answer all the questions. If you'd like to try again, please click the \"restart\" button";
+    finalTextDiv.textContent = "Unfortunetaly the time ran out before you could answer all the questions. If you'd like to try again, please click the \"Restart Quiz\" button.";
     locationOne.appendChild(finalTextDiv);
     var resetBtn = document.createElement("button");
     resetBtn.setAttribute("id", "reset");
-    resetBtn.textContent = "Resetart Quiz";
+    resetBtn.textContent = "Restart Quiz";
     locationOne.appendChild(resetBtn);
-    resetBtn.addEventListener("click", function() {restart()});
+    resetBtn.addEventListener("click", function() {audio3.play(); restart()});
 }
 
 var restart = function(){

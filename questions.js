@@ -2,28 +2,28 @@
 
 var questions = [
     {
-        title: "Question one",
-        choices: ["answer 1", "answer 2" , "answer 3", "answer 4"],
-        answer:"answer 1"
+        title: "What is your name?",
+        choices: ["It is Arthur, king of the Brittons", "Sir Galahad of Camelot" , "Sir Robin of Camelot", "none of the above"],
+        answer:"none of the above"
     },
     {
-        title:"Question two",
-        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
-        answer:"answer 1"
+        title:"What is your quest?",
+        choices:["to seek the holy grail", "to fight!" , "to pass this quiz", "I seek the grail"],
+        answer:"to pass this quiz"
     },
     {
-        title:"Question three",
-        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
-        answer:"answer 1"
+        title:"What is your favorite color?",
+        choices:["blue", "yellow" , "green", "orange"],
+        answer:"yellow"
     },
     {
-        title:"Question four",
-        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
-        answer:"answer 1"
+        title:"What is the capital of Assyria",
+        choices:["Baghdad", "Assur" , "Teheran", "Rabat-Amon"],
+        answer:"Assur"
     },
     {
-        title:"Question five",
-        choices:["answer 1", "answer 2" , "answer 3", "answer 4"],
-        answer:"answer 1"
+        title:"What is the air-speed velocity of an unladen swallow?",
+        choices:["What do you mean? African or European swallow?", "30 mph" , "20 mph", "15 mph"],
+        answer:"What do you mean? African or European swallow?"
     }
 ]

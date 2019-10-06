@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-image: url(bridge.jpg); height:100%; background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Grenze|Indie+Flower&display=swap" rel="stylesheet">
     <title>Coding Quiz home</title>
     
 </head>
-<body>
-    <a href="highscores.html" alt="highscore page">Highscores</a>
+<body >
+    <a href="highscores.html" alt="highscore page" id="scores">Highscores</a>
     <span class="timer">Time remaining:</span><span class="time timer"> 75</span><span class ="timer"> seconds</span>
-    <button id="startClock">Start the clock</button>
+    <button id="startClock">Start the Clock</button>
     <div id="intro">
-        <h2>Welcome to the Coding Quiz.</h2>
-        <h3>When you are ready, click the "start the clock" button. The timer will start, and the questions will appear. Good luck!</h3>
+        <h2>Welcome to the Quiz of Death.</h2>
+        <h3>If you wish to stay alive, you must answer me these questions five!</h3>
+        <h4>(To start, click the "Start the Clock" button. The questions will display and the timer will start. An incorrect answer will cost you 15 seconds.)</h4>
+        <h3>Turn up your sound.</h3>
     </div>
     <div id="empty-div"></div>
     <script src="questions.js"></script>

@@ -1,3 +1,128 @@
+
 table, th, td {
-    border: 1px solid black;
-  }
+  border: 1px solid black;
+}
+
+#tableTime {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+  
+#tableTime td, #tableTime th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+  
+#tableTime td:nth-child(even){background-color: #f2f2f2;}
+  
+#tableTime th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+#score {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 40px;
+}
+
+#clearScores{
+  border-style: outset;
+  border-width:3px;
+  padding:5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top:10px;
+  margin-left:100px;
+  background-color: red;
+  color:whitesmoke;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+a:link {
+  text-decoration: none;
+}
+  
+a:visited {
+  text-decoration: none;
+}
+
+#home, #scores{
+  background-color: purple;
+  color:whitesmoke;
+  padding:5px;
+  
+}
+
+#startClock {
+  background-color: black;
+  color: whitesmoke;
+  padding:5px;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 10px;
+  position:absolute;
+  top:200px;
+}
+
+.timer{
+  background-color:black;
+  color:rgb(141, 141, 226);
+  padding:5px;
+  
+}
+
+#questionParent{
+  font-size:20px;
+  margin-top:20px;
+}
+
+#questionDiv{
+  font-family: 'Grenze', serif;
+}
+
+.btn{
+  font-family: 'Indie Flower', cursive;
+  padding:5px;
+  padding-left:10px;
+  padding-right:10px;
+  font-size:20px;
+  border-radius: 10px;
+}
+
+#endText{
+  font-size:20px;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+#submit{
+  background-color: black;
+  color: whitesmoke;
+  padding:5px;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 10px;
+}
+
+#reset{
+  background-color: black;
+  color: whitesmoke;
+  padding:5px;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 10px; 
+}
+
+#failDiv {
+  font-size:20px;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+
