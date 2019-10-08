@@ -61,7 +61,8 @@ var showTime = function(){
 var stop = function(){
     clearInterval(interval);
     questionCount = 0;
-    timeLeft.textContent = "NO TIME LEFT!";
+    if (timeLeft.textContent == 0) {
+    timeLeft.textContent = "NO TIME LEFT!";}
 }
 
 //a function that shuffles arrays
